@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: whitesmoke;
+}
+
+
+.notes-app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.notes-app h2 {
+  font-size: 30px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.notes-item:hover {
+  background-color: rgb(177, 211, 255);
+}
+
+.notes-item__title {
+  padding: 4px 0;
+}
+
+.kosong {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.notes-item__notes {
+  font-weight: lighter;
+}
+
+
+.notes-input input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.notes-input .body {
+  height: 200px;
+}
+
+/* .notes-input button {
+
+  font-size: 18px;
+  background-color: orangered;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  padding: 8px;
+  font-family: 'Inter', sans-serif;
+} */
