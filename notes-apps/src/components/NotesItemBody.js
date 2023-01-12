@@ -1,12 +1,19 @@
 import React from 'react';
- 
-function NotesItemBody({ title, body }) {
- return (
-   <div className="notes-item__body">
-     <h3 className="notes-item__title">{title}</h3>
-     <p className="notes-item__notes">{body}</p>
-   </div>
- );
+import PropTypes from 'prop-types';
+import { showFormattedDate } from '../utils'
+
+function NotesItemBody({ body, createdAt }) {
+  return (
+    <div className="notes-item__body">
+      <p className="notes-item__date">{showFormattedDate(createdAt)}</p>
+      <p className="notes-item__notes">{body}</p>
+    </div>
+  );
 }
- 
+
+NotesItemBody.propTypes = {
+  createdAt: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+}
+
 export default NotesItemBody;

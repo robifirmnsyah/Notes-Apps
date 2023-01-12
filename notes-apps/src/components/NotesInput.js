@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 class NotesInput extends React.Component {
   constructor(props) {
@@ -52,13 +53,12 @@ class NotesInput extends React.Component {
           </form>
         </div>
       </div>
-      // {/* <label for="formGroupExampleInput" class="form-label">Judul</label>
-      // <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventHandler} />
-      // <label for="formGroupExampleInput" class="form-label mt-3">Catatan</label>
-      // <input type="text" placeholder="Isinya apa?"  className='body' value={this.state.body} onChange={this.onBodyChangeEventHandler} />
-      // <button class="btn btn-primary" type="submit">Tambah</button> */}
     )
   }
+}
+
+NotesInput.propTypes = {
+  addNotes: PropTypes.func.isRequired,
 }
 
 export default NotesInput;
