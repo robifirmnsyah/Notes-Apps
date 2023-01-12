@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap');
 
+:root {
+  --font-color: #333;
+  --background-color: #eee;
+  --nav-bg: rgb(0, 89, 255);
+  --card-bg: rgb(255, 255, 255);
+  --title-bg: rgb(215, 255, 71);
+}
+ 
+[data-theme='dark'] {
+  --font-color: #eee;
+  --background-color: #333;
+  --nav-bg: rgb(99, 99, 99);
+  --card-bg: rgb(170, 170, 170);
+  --title-bg: rgb(255, 255, 255);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -8,7 +24,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: whitesmoke;
+  background-color: var(--background-color);
 }
 
 
@@ -17,12 +33,40 @@ main {
   padding: 16px;
 }
 
+button {
+  background: transparent;
+  color: #eee;
+  font-size: 20px;
+  border: 0;
+  cursor: pointer;
+}
+
+.input label {
+  color: #eee;
+}
+
+.navbar {
+  background-color: var(--nav-bg);
+}
 .notes-app__header {
   display: flex;
 }
 
+.input  {
+  margin: auto;
+}
+
+.login {
+  margin-top: 100px;
+}
+
+.card {
+  background-color: var(--card-bg);
+}
+
 .notes-app h2 {
   font-size: 30px;
+  color: var(--font-color);
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -61,10 +105,15 @@ main {
 }
 
 .title {
-  background-color: rgb(244, 255, 143);
+  background-color: var(--title-bg);
   padding: 0 15px;
   border: 1px solid black;
   border-radius: 15px;
+}
+
+.title h5 {
+  font-size: medium;
+  margin-top: 10px;
 }
 
 .notes-item__notes {

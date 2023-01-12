@@ -2,70 +2,74 @@ import React from "react";
 import { useSearchParams } from 'react-router-dom';
 import NotesList from "../components/NotesList";
 import SearchBar from "../components/SearchBar";
-import { deleteNotes, getAllNotes } from "../utils/data";
-import PropTypes from "prop-types";
+import { getActiveNotes } from "../utils/data-network";
+import { LocaleConsumer } from "../contexts/LocaleContex";
 
-function HomePageWrapper() {
+
+function HomePage() {
+  const [notes, setNotes] = React.useState([]);
+  const [title, setTitle] = React.useState(null);
+  const [body, setBody] = React.useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const keyword = searchParams.get("keyword") || "";
-  function changeSearchParams(keyword) {
+  const [keyword, setKeyword] = React.useState(() => {
+    return searchParams.get("keyword") || ''
+  });
+
+  React.useEffect(() => {
+    getActiveNotes().then(({ data }) => {
+      setNotes(data);
+    });
+  }, []);
+
+
+  function onChangeSearchParams(keyword) {
+    setKeyword(keyword);
     setSearchParams({ keyword });
   }
-  return (
-    <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
-  );
-}
 
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notes: getAllNotes(),
-      keyword: props.defaultKeyword || "",
+  const filteredNotes = notes.filter((note) => {
+    return note.title.toLowerCase().includes(
+      keyword.toLowerCase()
+    );
+  });
+
+  React.useEffect(() => {
+    async function setActiveNotes() {
+      const { error, data } = await getActiveNotes();
+
+      if (!error) {
+        setNotes(data)
+      }
+      setTitle(title);
+      setBody(body);
+    }
+    setActiveNotes();
+
+    return () => {
+      setTitle(null);
+      setBody(null);
     };
-    this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
-  }
+  }, [title, body]);
 
-  onDeleteHandler(id) {
-    deleteNotes(id);
-    this.setState(() => {
-      return {
-        notes: getAllNotes(),
-      };
-    });
-  }
+  return (
+    <LocaleConsumer>
+      {
+        ({ locale }) => {
+          return (
 
-  onKeywordChangeHandler(keyword) {
-    this.setState(() => {
-      return {
-        keyword,
-      };
-    });
-    this.props.keywordChange(keyword);
-  }
-
-  render() {
-    const notes = this.state.notes.filter((notes) => {
-      return notes.title
-        .toLowerCase()
-        .includes(this.state.keyword.toLowerCase());
-    });
-
-    return (
-      <section>
-        <SearchBar keyword={this.state.keyword || ""} keywordChange={this.onKeywordChangeHandler} />
-        <h2>Daftar Catatan</h2>
-        <NotesList notes={notes} onDelete={this.onDeleteHandler} />
-      </section>
-    )
-  }
-}
-
-HomePage.propTypes = {
-  keywordChange: PropTypes.func.isRequired,
-  defaultKeyword: PropTypes.string.isRequired,
+            <div>
+              <section>
+                <h2>{locale === 'id' ? "Daftar Catatan" : "List Notes"}</h2>
+                <SearchBar keyword={keyword} keywordChange={onChangeSearchParams} />
+                <NotesList notes={notes} filter={filteredNotes} />
+              </section>
+            </div>
+          )
+        }
+      }
+    </LocaleConsumer>
+  )
 }
 
 
-export default HomePageWrapper;
+export default HomePage;

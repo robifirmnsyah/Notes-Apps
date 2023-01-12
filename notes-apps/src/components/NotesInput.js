@@ -46,7 +46,7 @@ class NotesInput extends React.Component {
               <input type="text" className="form-control" value={this.state.title} onChange={this.onTitleChangeEventHandler} />
             </div>
             <div className="mb-3">
-              <label className="form-label">Catatan</label>
+              <label className="form-label font-color-blue">Catatan</label>
               <input type="text" className="form-control" value={this.state.body} onChange={this.onBodyChangeEventHandler} />
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>

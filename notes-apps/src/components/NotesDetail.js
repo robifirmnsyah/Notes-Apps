@@ -1,20 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import DeleteButton from "./DeleteButton"
 
-function NotesDetail({ title, body }) {
+function NotesDetail({ id, onDelete }) {
   return (
-    <div className="card detail">
-      <div className="card-body">
-        <h2 className="card-title">{title}</h2>
-        <p className="card-text">{body}</p>
-      </div>
+    <div>
+      <DeleteButton id={id} onDelete={onDelete} />
     </div>
   );
 }
 
 NotesDetail.propTypes = {
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default NotesDetail;

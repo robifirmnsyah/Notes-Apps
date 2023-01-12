@@ -1,5 +1,5 @@
 import React from 'react';
-import { addNotes } from '../utils/data';
+import { addNotes } from '../utils/data-network';
 import NotesInput from '../components/NotesInput';
 import { useNavigate } from 'react-router-dom';
 
